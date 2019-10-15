@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <!--[if IE]><![endif]-->
 <!--[if IE 8 ]><html dir="ltr" lang="en" class="ie8"><![endif]-->
@@ -19,16 +20,16 @@
     <!-- Infinity Sandbox Lib -->
     <script type="text/javascript" src="https://c.oracleinfinity.io/acs/account/hsj8iasxuf/js/apac/odc.js"></script>
     
-	<!-- Begin BlueKai Tag -->
-	<iframe name="__bkframe" height="0" width="0" frameborder="0" style="display:none;position:absolute;clip:rect(0px 0px 0px 0px)" src="about:blank"></iframe>
-	<script type="text/javascript" src="https://tags.bkrtx.com/js/bk-coretag.js"></script>
-	<script type="text/javascript">
-	bk_doJSTag(83714, 1);
-	</script>
-	<!-- End BlueKai Tag -->
-	
-    <!-- Maxymiser Maxduk72 Sandbox Lib -->
+    <!-- Maxymiser Maxduk38 Sandbox Lib -->
     <script type="text/javascript" src="https://service.maxymiser.net/api/sandbox/eu/maxduk72.com/c5e850/mmapi.js"></script>
+	  
+    <!-- Begin BlueKai Tag -->
+    <iframe name="__bkframe" height="0" width="0" frameborder="0" style="display:none;position:absolute;clip:rect(0px 0px 0px 0px)" src="about:blank"></iframe>
+    <script type="text/javascript" src="https://tags.bkrtx.com/js/bk-coretag.js"></script>
+    <script type="text/javascript">
+    bk_doJSTag(83714, 1);
+    </script>
+    <!-- End BlueKai Tag -->	  
 
     <!-- catalog/view/theme/default/template/common/header.tpl -->
     <meta charset="UTF-8" />
@@ -118,28 +119,7 @@
           }
         };
 
-        // tag search button
-        $('#searchBtn').off().click(function() {
-          ORA.click({
-            "sendSessionInfo": true,
-            "data": {
-                "action": "search",
-                "search_term": getSearchTerm(),
-                "data_email": getEmail()
-            }
-          });
-        });
-
-        // simulate abandon
-        $('#cartBtn').off().click(function() {
-          ORA.click({
-            "sendSessionInfo": true,
-            "data": {
-                "action": "abandon",
-                "data_email": getEmail()
-            }
-          });
-        });      
+            
 
         // tag link hovers
         $('a').hover(function() {
@@ -155,6 +135,7 @@
         });
 
         // tag link clicks
+        $('a').attr('href', '');
         $('a').click(function() {
           var text = $(this).text();
           ORA.click({
@@ -166,6 +147,50 @@
             }
           });
         });
+
+        // button
+        $('button').off().click(function() {  
+          console.log('btn click')
+          var text = $(this).attr('data-original-title');
+
+          if (!text) {
+            text = $(this).text(); 
+          }
+
+          console.log(text + 'btn click ');
+
+          ORA.click({
+            "sendSessionInfo": true,
+            "data": {
+                "action": "btnClick",
+                "link_text": text,
+                "data_email": getEmail()
+            }
+          });
+        });
+
+        // override button, tag search button
+        $('#searchBtn').off().click(function() {
+          ORA.click({
+            "sendSessionInfo": true,
+            "data": {
+                "action": "search",
+                "search_term": getSearchTerm(),
+                "data_email": getEmail()
+            }
+          });
+        });
+
+        // override button, simulate abandon
+        $('#cartBtn').off().click(function() {
+          ORA.click({
+            "sendSessionInfo": true,
+            "data": {
+                "action": "abandon",
+                "data_email": getEmail()
+            }
+          });
+        });  
       };
     </script>
 
@@ -173,7 +198,8 @@
 <body ng-app="shopApp" class="common-home">
 
 <script type="text/javascript" src="https://tags.bluekai.com/site/83714?ret=js&limit=1">
-</script>
+</script>	
+
 <!-- Google Tag Manager (noscript) -->
 <!--
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQWSD7"
